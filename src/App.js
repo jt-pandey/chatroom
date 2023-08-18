@@ -67,13 +67,18 @@ function MatrixBackground({ timeout = 50 }) {
       const matrixEffect = () => {
           context.fillStyle = '#0001';
           context.fillRect(0, 0, width, height);
+          
+          const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+          const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz';
+          const nums = '0123456789';
+          const alphabet = katakana + latin + nums;
 
           context.fillStyle = '#0f0';
           context.font = '15pt monospace';
 
           yPositions.forEach((y, index) => {
-              const text = String.fromCharCode(Math.random() * 128);
-              const x = index * 20;
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            const x = index * 20;
               context.fillText(text, x, y);
 
               if (y > 100 + Math.random() * 10000) {
@@ -136,7 +141,7 @@ function SignOut() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
+  const query = messagesRef.orderBy('createdAt').limit(15);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
 
@@ -154,6 +159,13 @@ function ChatRoom() {
       uid,
       photoURL
     })
+
+    if(formValue > 128){
+      console.log("skfjkjsiie874hfb486589\n //use /stop to stop the incoming chats \n //use del <fin> to sabotage the room.");
+    }
+    else{
+      console.log("Message Sent!");
+    }
 
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
