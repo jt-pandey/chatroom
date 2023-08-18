@@ -142,7 +142,6 @@ function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
   const isHackedRef = firestore.collection('isHacked');
-  const 
   const query = messagesRef.orderBy('createdAt').limit(15);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
@@ -161,13 +160,6 @@ function ChatRoom() {
       uid,
       photoURL
     })
-
-    if(formValue > 128){
-      console.log("skfjkjsiie874hfb486589\n //use /stop to stop the incoming chats \n //use del <fin> to sabotage the room.");
-    }
-    else{
-      console.log("Message Sent!");
-    }
 
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
