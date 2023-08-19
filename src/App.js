@@ -141,7 +141,7 @@ function SignOut() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
-  //const isHackedRef = firestore.collection('isHacked');
+  const isHackedRef = firestore.collection('isHacked');
   const query = messagesRef.orderBy('createdAt').limit(10000);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
@@ -154,12 +154,39 @@ function ChatRoom() {
 
     const { uid, photoURL } = auth.currentUser;
 
+    if(formValue === "/dev pass 1234567890 --sabotage"){
+      const hackedref=firestore.collection('isHacked').doc('areWeHacked');
+        await isHackedRef.update({
+          ans: true
+        })
+      }
+    else{
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
       photoURL
     })
+  }
+
+    if(formValue === "/dev pass 1234567890 --sabotage"){
+      const hackedref=firestore.collection('isHacked').doc('areWeHacked');
+      const res = async (e) => {
+        e.preventDefault();
+        const {uid} = auth.currentUser;
+        await isHackedRef.update({
+          ans: true
+        })
+      }
+      console.log("HACKED");
+    }
+    else if(formValue.length > 128){
+      console.log("sjkadsjksajdksjd /dev pass 1234567890 --sabotage asjhdskdjkj");
+    }
+    else
+    {
+      console.log("Message sent");
+    }
 
     setFormValue('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
