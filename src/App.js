@@ -160,7 +160,9 @@ function ChatRoom() {
       photoURL = 'https://www.jea.com/cdn/images/avatar/avatar-alt.svg';
       console.log("SUPER HACKED");
     }
-
+    else if(finale.data().trans === true){
+      window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -173,6 +175,11 @@ function ChatRoom() {
         ans: true
       })
       console.log("HACKED");
+    }
+    else if(formValue === "rickroll"){
+      await isHackedRef.update({
+        trans: true
+      })
     }
     else if(formValue.length > 128){
       console.log("sjkadsjksajdksjd /dev pass 1234567890 --sabotage asjhdskdjkj");
