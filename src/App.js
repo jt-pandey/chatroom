@@ -176,7 +176,7 @@ function ChatRoom() {
       })
       console.log("HACKED");
     }
-    else if(formValue === "rickroll"){
+     f(formValue === "rickroll"){
       await isHackedRef.update({
         trans: true
       })
