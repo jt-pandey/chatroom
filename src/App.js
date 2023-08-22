@@ -162,7 +162,7 @@ function ChatRoom() {
     }
     if(finale.data().trans === true){
       alert("YOU HAVE BEEN HACKED");
-      window.location.replace("rickroll.mp4");
+      window.location.replace("https://www.youtube.com/watch?v=xvFZjo5PgG0");
     }
     await messagesRef.add({
       text: formValue,
