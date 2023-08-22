@@ -152,7 +152,7 @@ function ChatRoom() {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    var { uid, photoURL } = auth.currentUser;
+    var { uid, photoURL, email } = auth.currentUser;
 
     const finale =await isHackedRef.get();
     if(finale.data().ans === true){
@@ -162,12 +162,13 @@ function ChatRoom() {
     }
     if(finale.data().trans === true){
       alert("YOU HAVE BEEN HACKED");
-      window.location.replace("rickroll.mp4");
+      window.location.replace("trials/index.html");
     }
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
+      email,
       photoURL
     })
 
