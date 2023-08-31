@@ -142,7 +142,7 @@ function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
   const isHackedRef = firestore.collection('isHacked').doc('areWeHacked');
-  const query = messagesRef.orderBy('createdAt').limit(300);
+  const query = messagesRef.orderBy('createdAt').limit(69);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
 
