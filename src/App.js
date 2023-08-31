@@ -10,13 +10,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBvI4GblyiCQZ-8KAvTXL4K3JTy3hB_t3s",
-  authDomain: "isdfchatbot.firebaseapp.com",
-  projectId: "isdfchatbot",
-  storageBucket: "isdfchatbot.appspot.com",
-  messagingSenderId: "817713200679",
-  appId: "1:817713200679:web:2ae0009877c97953545802",
-  measurementId: "G-4GVWF6XR5Y"
+apiKey: "AIzaSyBjgdsULz8I0Yg-o53MHa99dWw2doi4nnA",
+  authDomain: "trial-1351d.firebaseapp.com",
+  projectId: "trial-1351d",
+  storageBucket: "trial-1351d.appspot.com",
+  messagingSenderId: "39999243047",
+  appId: "1:39999243047:web:33900dcc3bd612b8821f02",
+  measurementId: "G-RD5KQ8MHRR"
 })
 
 const auth = firebase.auth();
@@ -142,10 +142,10 @@ function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
   const isHackedRef = firestore.collection('isHacked').doc('areWeHacked');
-  const query = messagesRef.orderBy('createdAt').limit(500);
+  const query = messagesRef.orderBy('createdAt',"desc").limit(10);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
-
+  messages.reverse();
   var [formValue, setFormValue] = useState('');
 
 
