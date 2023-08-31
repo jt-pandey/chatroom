@@ -145,7 +145,7 @@ function ChatRoom() {
   const query = messagesRef.orderBy('createdAt',"desc").limit(10);
 
   const [messages] = useCollectionData(query, { idField: 'id' });
-  messages.reverse();
+  // messages.reverse();
   var [formValue, setFormValue] = useState('');
 
 
